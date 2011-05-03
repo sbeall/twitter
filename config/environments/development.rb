@@ -1,4 +1,8 @@
+
 SampleApp::Application.configure do
+  
+
+
   # Settings specified here will take precedence over those in config/application.rb
 
   # In the development environment your application's code is reloaded on
@@ -15,7 +19,21 @@ SampleApp::Application.configure do
   config.action_controller.perform_caching = false
 
   # Don't care if the mailer can't send
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+  :enable_starttls_auto => true,
+  :address              => "smtp.gmail.com",
+  :port                 => 587,
+  :domain               => 'gmail.com',
+  :user_name            => 'scottcbeall@gmail.com',
+  :password             => 'dogkiller',
+  :authentication       => :plain  }
+  
+ 
+
+  
+
 
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log

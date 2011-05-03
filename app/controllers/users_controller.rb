@@ -27,13 +27,16 @@ class UsersController < ApplicationController
     @microposts = @user.microposts.paginate(:page => params[:page])
     @title = @user.name
   end
+  
   def new
    @user = User.new
    @title = "Sign up"
   end
+ 
   def create
     @user = User.new(params[:user])
     if @user.save
+      UserMailer.registration_confirmation(@user).deliver
       sign_in @user
       flash[:sucess] = "Welcome to the Sample App!"
       redirect_to @user
