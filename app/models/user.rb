@@ -1,7 +1,7 @@
 require 'digest'
 class User < ActiveRecord::Base
   attr_accessor :password
-  attr_accessible :name, :email, :password, :password_confirmation
+  attr_accessible :name, :email, :password, :password_confirmation, :admin
   
   has_many :microposts, :dependent => :destroy
   has_many :relationships, :foreign_key => "follower_id",
@@ -21,7 +21,13 @@ class User < ActiveRecord::Base
   
   before_save :encrypt_password
     
-    
+  def self.search(search)
+    if search
+      find(:all, :conditions => ['name LIKE ?', "%#{search}%"])
+    else
+      find(:all)
+    end
+  end
     
 
   

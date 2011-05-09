@@ -1,6 +1,10 @@
 class MicropostsController < ApplicationController
   before_filter :authenticate, :only => [:create, :destroy]
   before_filter :authorized_user, :only => :destroy
+  
+  def index
+    @microposts = Micropost.find(:all)
+  end
 
   def create
     @micropost = current_user.microposts.build(params[:micropost])

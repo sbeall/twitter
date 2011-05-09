@@ -3,6 +3,10 @@ class UsersController < ApplicationController
   before_filter :correct_user, :only => [:edit, :update]
   before_filter :admin_user, :only => :destroy
   
+ 
+    
+ 
+  
   def following
     @title = "Following"
     @user = User.find(params[:id])
@@ -20,6 +24,7 @@ class UsersController < ApplicationController
    def index
     @title = "All users"
     @users = User.paginate(:page => params[:page])
+    @users = User.search(params[:search])
   end
   
   def show
@@ -68,7 +73,7 @@ class UsersController < ApplicationController
     redirect_to users_path
   end
   
-  
+
   
   private
   

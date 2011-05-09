@@ -9,6 +9,8 @@ SampleApp::Application.routes.draw do
   resources :relationships, :only => [:create, :destroy]
   
 
+  
+
   match '/contact', :to => 'pages#contact'
   match '/about', :to => 'pages#about'
   match '/help', :to => 'pages#help'
